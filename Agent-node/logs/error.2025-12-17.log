@@ -1,0 +1,12 @@
+[2025-12-17T21:42:44.033] [ERROR] error - 错误日志：POST /wxLogin - ReferenceError: abcd is not defined
+[2025-12-17T21:47:37.028] [ERROR] error - ReferenceError: abcd is not defined
+    at wxLogin (D:\Web\agent\Agent-node\controller\user.js:5:5)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:958:18
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:34:12
+    at Router.<anonymous> (D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:890:62)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at errorHandler (D:\Web\agent\Agent-node\config\errorhandler.js:5:11)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at responsseHandler (D:\Web\agent\Agent-node\config\result.js:18:9)

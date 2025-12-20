@@ -1,0 +1,35 @@
+[2025-12-20T11:23:22.003] [ERROR] error - { msg: 'departure字段必填', code: 400, validate: null }
+[2025-12-20T11:23:34.787] [ERROR] error - { msg: '请传入出发地', code: 422, validate: null }
+[2025-12-20T19:13:34.170] [ERROR] error - TypeError: Cannot destructure property 'goodsId' of 'ctx.query.body' as it is undefined.
+    at goodsDetail (D:\Web\agent\Agent-node\controller\goods.js:16:13)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:958:18
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:34:12
+    at Router.<anonymous> (D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:890:62)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at serve (D:\Web\agent\Agent-node\node_modules\koa-static\index.js:53:15)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at errorHandler (D:\Web\agent\Agent-node\config\errorhandler.js:5:11)
+[2025-12-20T19:15:01.120] [ERROR] error - TypeError: Cannot destructure property 'goodsId' of 'ctx.query.body' as it is undefined.
+    at goodsDetail (D:\Web\agent\Agent-node\controller\goods.js:16:13)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:958:18
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:34:12
+    at Router.<anonymous> (D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:890:62)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at serve (D:\Web\agent\Agent-node\node_modules\koa-static\index.js:53:15)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at errorHandler (D:\Web\agent\Agent-node\config\errorhandler.js:5:11)
+[2025-12-20T19:15:53.484] [ERROR] error - ReferenceError: ValidityState is not defined
+    at goodsDetail (D:\Web\agent\Agent-node\controller\goods.js:17:5)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:958:18
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:34:12
+    at Router.<anonymous> (D:\Web\agent\Agent-node\node_modules\@koa\router\dist\index.js:890:62)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at serve (D:\Web\agent\Agent-node\node_modules\koa-static\index.js:53:15)
+    at dispatch (D:\Web\agent\Agent-node\node_modules\koa-compose\index.js:42:32)
+    at errorHandler (D:\Web\agent\Agent-node\config\errorhandler.js:5:11)
