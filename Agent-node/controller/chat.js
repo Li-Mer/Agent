@@ -44,7 +44,9 @@ class ChatController {
       // 判断是否可以调用函数，工具
       // console.log(str);
       const choices = obj.choices[0].delta;
-      if (choices.content === null && choices.tool_calls) {
+
+      // 修改：移除 choices.content === null 的判断，防止漏掉 content 为 undefined 的数据包
+      if (choices.tool_calls) {
         // console.log("用工具调用-----------");
         if (messages[messages.length - 1].role !== "assistant") {
           messages.push({ role: "assistant", content: "", tool_calls: [] });
@@ -68,10 +70,17 @@ class ChatController {
       }
       // 等遍历完毕把工具调用的结果返给前端
       if (obj.choices[0].finish_reason == "tool_calls") {
+        let args = {};
+        try {
+          // 添加 try-catch 防止解析不完整的 JSON 导致报错
+          args = JSON.parse(requireParameters);
+        } catch (error) {
+          console.error("JSON解析失败:", error);
+        }
         const resObj = JSON.stringify({
           type: "function",
           functionName,
-          data: JSON.parse(requireParameters),
+          data: args,
         });
         const buffer = Buffer.from(resObj);
         ctx.res.write(buffer);

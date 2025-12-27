@@ -7,6 +7,9 @@ const user = require("@/controller/user");
 const uploadFile = require("@/config/uploadfile");
 //商品
 const goods = require("@/controller/goods");
+//投诉
+const complaint = require("@/controller/complaint");
+router.post("/addComplaint", complaint.addComplaint);
 
 //用户登录
 router.post("/wxLogin", user.wxLogin);
@@ -25,7 +28,7 @@ router.get("/queryWeather", calltool.queryWeather);
 //导入商品数据
 router.get("/addGoods", goods.addGoods);
 //查询商品详情
-router.post("/goodsDetail", goods.goodsDetail);
+router.post("/goodsDetails", goods.goodsDetail);
 //搜索商品
 router.post("/searchGoods", goods.searchGoods);
 

@@ -24,12 +24,12 @@ class GoodsController {
     const { goodsId } = ctx.request.body;
     await Validate.nullCheck(goodsId, "请传入商品ID", "goodsId");
     const res = await modelGoods.findById(goodsId);
-    ctx.send(res);
+    ctx.send([res]);
   }
   //通过大模型提取关键词，搜索商品
   async searchGoods(ctx) {
-    const { userMeaasge } = ctx.request.body;
-    await Validate.nullCheck(userMeaasge, "缺少用户对话", "userMeaasge");
+    const { userMessage } = ctx.request.body;
+    await Validate.nullCheck(userMessage, "缺少用户对话", "userMessage");
     const completion = await openai.chat.completions.create({
       model: "qwen-plus", //模型列表
       messages: [
@@ -40,7 +40,7 @@ class GoodsController {
         },
         {
           role: "user",
-          content: `用户提问:${userMeaasge}`,
+          content: `用户提问:${userMessage}`,
         },
       ],
     });
