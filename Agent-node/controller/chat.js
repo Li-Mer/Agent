@@ -18,8 +18,17 @@ class ChatController {
       "chatMessage字段不能为空",
       "chatMessage"
     );
-    // 删除数组的最后一项
-    chatMessage.pop();
+    // chatMessage.pop();
+    // 前端会在末尾追加一个 assistant 占位消息（progress=true），需要剔除；
+    // 但在 API 调试工具里通常只有 user 一条消息，不能把用户问题 pop 掉。
+    const last = chatMessage?.[chatMessage.length - 1];
+    if (
+      last &&
+      last.role === "assistant" &&
+      (last.progress === true || last.content === "")
+    ) {
+      chatMessage.pop();
+    }
     let messages = [
       {
         role: "system",
@@ -27,8 +36,56 @@ class ChatController {
       },
       ...chatMessage,
     ];
+
+    // 把本地/内网 URL 的图片转成 dataURL，避免云端模型拉不到 127.0.0.1
+    //以下这段代码的作用是通过fetch后渠道图片的二进制内容，然后转换成base64编码的dataURL格式，随消息直接传递给大模型，然后让大模型解析。
+    for (const m of messages) {
+      if (m?.role !== "user") continue;
+      if (!Array.isArray(m.content)) continue;
+
+      for (const part of m.content) {
+        if (part?.type !== "image_url") continue;
+
+        const url = part?.image_url?.url;
+        if (!url) continue;
+
+        const isLocal =
+          url.startsWith("http://127.0.0.1") ||
+          url.startsWith("http://localhost") ||
+          url.startsWith("https://127.0.0.1") ||
+          url.startsWith("https://localhost");
+
+        if (!isLocal) continue;
+
+        // 在服务端把图片拉下来转 base64
+        console.log("转换本地图片 URL 为 dataURL:", url);
+        const resp = await fetch(url);
+
+        if (!resp.ok) {
+          throw { msg: `图片URL不可访问: ${url}`, code: 422, validate: null };
+        }
+        const contentType = resp.headers.get("content-type") || "image/jpeg";
+        const buf = Buffer.from(await resp.arrayBuffer());
+        const dataUrl = `data:${contentType};base64,${buf.toString("base64")}`;
+        console.log("转换后的 dataURL:", dataUrl);
+
+        part.image_url.url = dataUrl;
+      }
+    }
+
+    const hasImage = messages.some((m) => {
+      if (m?.role !== "user") return false;
+      const content = m?.content;
+      return (
+        Array.isArray(content) &&
+        content.some((part) => part?.type === "image_url")
+      );
+    });
+
     const completion = await openai.chat.completions.create({
-      model: "qwen-plus", //模型列表
+      // model: "qwen-plus",
+      // 需要识图时必须使用视觉模型，否则会出现“无法查看/分析图片”的回复
+      model: hasImage ? "qwen-vl-plus" : "qwen-plus", //模型列表
       messages,
       stream: true,
       tools,

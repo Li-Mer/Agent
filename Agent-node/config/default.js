@@ -11,5 +11,6 @@ module.exports = {
   queryWeatherUrl: "https://ali-weather.showapi.com/day15",
   dbUrl: {
     host: "mongodb://localhost/agent",
+    // host: "mongodb://15071086386:JINLIcmbs123321@42.121.216.209:27017/agentdata?authSource=agentdata",
   },
 };

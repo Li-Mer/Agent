@@ -1,0 +1,12 @@
+修改ip地址之后哪些文件需要修改：
+nginx.conf中ip地址修改：server_name  42.121.163.101
+defalult.js中数据库ip地址修改（应该不用改了，我给改成127.0.0.1内网地址了）
+
+request.ts中请求地址修改：const requestUrl = "http://42.121.216.209"   (dist中全部有关request的请求地址都需要修改)
+vite.config.ts中base地址修改：base:"/agent"
+inputArea.vue中上传图片地址修改：fileList.value[0].url = "http://" + res.data;
+
+
+之后对代码的更改：
+Agent-user/src/store/index.ts：添加了缓存天气、火车票查询结果的功能
+Agent-user/src/page/home/home.vue：手写了一个节流函数，替换掉lodash的节流函数

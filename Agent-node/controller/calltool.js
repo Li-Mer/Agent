@@ -49,7 +49,7 @@ class CallToolController {
     } catch (error) {
       console.log("出错");
       console.log(error);
-      if (error.response.statue === 450 && error.response.data) {
+      if (error.response.status === 450 && error.response.data) {
         ctx.send(
           [],
           200,
