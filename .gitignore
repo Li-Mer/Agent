@@ -54,3 +54,12 @@ desktop.ini
 
 # 上传文件目录（按需调整）
 # image_file/
+
+# 敏感服务器配置文件
+nginx.conf
+ssl.conf
+*.key
+*.crt
+*.pem
+*.conf
+
